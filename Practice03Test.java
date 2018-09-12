@@ -73,7 +73,7 @@ public class Practice03Test {
 		return findMinRec(lower, upper);
 	}
 
-	public int findMinRec (int lower, int upper){
+	public int findMinRec(int lower, int upper){
 		int min = 0;
 		int lowerMin = 0;
 		int upperMin = 0;
