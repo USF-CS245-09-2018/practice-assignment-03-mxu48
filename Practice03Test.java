@@ -5,7 +5,9 @@ public class Practice03Test {
 
 	protected int count = 0;
 	protected double [] arr;
-
+	/* Added to be called by findMinRec */
+	int lower = 0;
+	int upper = 0;
 
 	/**
 	 * Constructor
@@ -52,13 +54,52 @@ public class Practice03Test {
 	}
 
 
-	public int find_min_iterative () {
-		// TODO: Fill in this iterative function.
+	public int find_min_iterative() {
+		/* Set min as first index in array to start */
+		int min = 0;
+		/* Start at next number in array to compare */
+		for(int i = 1; i < arr.length; i++){
+			if(arr[i] < arr[min]){
+				/* If number in array is less than min value, set index as new min */
+				min = i;
+			}
+		}
+		return min;
 	}
 
+	public int find_min_recursive() {
+		/* lower still = 0, upper is length of array */
+		upper = arr.length-1;
+		return findMinRec(lower, upper);
+	}
 
-	public int find_min_recursive () {
-		// TODO: Fill in this recursive function.
+	public int findMinRec (int lower, int upper){
+		int min = 0;
+		int lowerMin = 0;
+		int upperMin = 0;
+		/* Bisect array */
+		int mid = (lower+upper)/2;
+
+		/* Base case */
+		if(lower == upper){
+			/* If array is empty, lower is default min index */
+			return lower;
+		}
+
+		/* Else, split and search recursively like binary search */
+		/* Get min on lower side */
+		lowerMin = findMinRec(lower, mid);
+
+		/* Get min on upper side*/
+		upperMin = findMinRec(mid+1, upper);
+
+		/* Get lowest min between two sides of array */
+		if(arr[lowerMin] < arr[upperMin]){
+			min = lowerMin;
+		} else {
+			min = upperMin;
+		}
+		return min;
 	}
 
 
